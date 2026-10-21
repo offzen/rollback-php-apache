@@ -1,6 +1,6 @@
 # rollback-php-apache
 
-一键回滚被 `apt[-get] upgrade php` 顺带装上的 php / apache2 栈。
+一键回滚被 `apt[-get] upgrade php` 顺带装上的 php / apache2 栈。**⚠️默认参数是24小时内；请注意按自己错误使用upgrade php的时间自行修改脚本里的参数**
 
 ## 简介
 
@@ -24,7 +24,7 @@ Debian 上执行 `apt-get upgrade php` / `apt upgrade php` 时，apt 3.x 会把
 ## 用途
 
 - 误执行 `apt-get upgrade php` / `apt upgrade php` 之后，清理被拉进来的 php + apache2 栈
-- 新机器上 `apache2` 抢占 80 端口，需要把它释放给 nginx / caddy 等
+- **新机器上 `apache2` 抢占 80 端口，需要把它释放给 nginx / caddy 等**
 - 需要把这台机器恢复成「没有 php / apache 运行环境」的干净状态
 - 变更前先看计划：直接运行脚本即为干跑模式，输出将 purge 的包清单
 
@@ -35,7 +35,7 @@ curl -fsSL --proto '=https' -o /root/rollback-php-apache.sh https://raw.githubus
 ```
 
 上面这条命令会**下载 + 校验 sha256 + 赋可执行权限 + 直接执行回滚**，不依赖任何内部源。
-如果只想先看计划，把末尾的 `--apply --purge-libs` 去掉即可（默认干跑）：
+**dry-run** 如果只想先看计划，把末尾的 `--apply --purge-libs` 去掉即可（默认干跑）：
 
 ```bash
 curl -fsSL --proto '=https' -o /root/rollback-php-apache.sh https://raw.githubusercontent.com/offzen/rollback-php-apache/main/rollback-php-apache.sh && echo "3aa7b3961caaa09bfa11781f96abfdfb979c94d3415bcbb559334325a8ac1336  /root/rollback-php-apache.sh" | sha256sum -c - && chmod +x /root/rollback-php-apache.sh && /root/rollback-php-apache.sh
