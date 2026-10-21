@@ -35,7 +35,8 @@ curl -fsSL --proto '=https' -o /root/rollback-php-apache.sh https://raw.githubus
 ```
 
 上面这条命令会**下载 + 校验 sha256 + 赋可执行权限 + 直接执行回滚**，不依赖任何内部源。
-**dry-run** 如果只想先看计划，把末尾的 `--apply --purge-libs` 去掉即可（默认干跑）：
+## **dry-run** 
+如果只想先看计划，把末尾的 `--apply --purge-libs` 去掉即可（默认干跑）：
 
 ```bash
 curl -fsSL --proto '=https' -o /root/rollback-php-apache.sh https://raw.githubusercontent.com/offzen/rollback-php-apache/main/rollback-php-apache.sh && echo "3aa7b3961caaa09bfa11781f96abfdfb979c94d3415bcbb559334325a8ac1336  /root/rollback-php-apache.sh" | sha256sum -c - && chmod +x /root/rollback-php-apache.sh && /root/rollback-php-apache.sh
